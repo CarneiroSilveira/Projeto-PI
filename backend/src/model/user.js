@@ -19,9 +19,22 @@ class User {
         type: database.db.Sequelize.STRING,
       },
       permission: {
-        type: database.db.Sequelize.ENUM("Admin", "Custumer", "Premium", "Verifcated", "Teach"),
-        defaultValue: "Custumer",
+        type: database.db.Sequelize.ENUM("Admin", "Studant", "Premium", "Moderator"),
+        defaultValue: "Studant",
       },
+    });
+
+    // Estabelece uma conexão many-to-many entre a tabela users e characters e cria uma tabela intermediaria chamada profile
+    this.model.associate = (models) => {
+      Student.belongsToMany(models.characters, {
+        through: 'profile', // Nome da tabela de junção
+        foreignKey: 'userId'
+      });
+      // Faz a mesma coisa mas com a tabela subjects
+    };
+        Student.belongsToMany(models.subjects, {
+        through: 'favorite-subjects', // Nome da tabela de junção
+        foreignKey: 'userId'
     });
   }
 }

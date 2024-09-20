@@ -1,6 +1,6 @@
 const database = require("../config/database");
 
-class Characters {
+class Character {
   constructor() {
     this.model = database.db.define("characters", {
       id: {
@@ -11,22 +11,27 @@ class Characters {
       name: {
         type: database.db.Sequelize.STRING,
       },
-      species: {
-        type: database.db.Sequelize.STRING,
-      },
       image: {
         type: database.db.Sequelize.STRING,
       },
       gender: {
-        type: database.db.Sequelize.ENUM('Female', 'Male', 'Genderless', 'unknown'),
+        type: database.db.Sequelize.ENUM('Female', 'Male', 'Other'),
         allowNull: false,
       },
       status: {
-        type: database.db.Sequelize.ENUM('Alive', 'Dead', 'unknown'),
-        allowNull: false,
+        type: database.db.Sequelize.ENUM('Alive', 'Deleted'),
+        defaultValue: 'Alive'
       },
+      
     });
+
+    this.model.associate = (models) => {
+        Student.belongsToMany(models.users, {
+          through: 'profile', // Nome da tabela de junção
+          foreignKey: 'userId'
+        });
+      };
   }
 }
 
-module.exports = new Characters().model;
+module.exports = new Character().model;
