@@ -1,11 +1,11 @@
-const user = require("../model/user");
+const usuario = require("../model/usuario");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const SECRET_KEY = "exemplo";
 const SALT_VALUE = 10;
 
-class UserController {
+class UsuarioController {
   async createUser(username, email, senha, dataNacimento, nome, sobrenome) {
     // Regex para validação de nome e sobrenome (somente letras e pelo menos 2 caracteres)
     const nameRegex = /^[A-Za-z]{2,}$/;
@@ -51,7 +51,9 @@ class UserController {
 
     const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
 
-    const userValue = await user.create({
+    const userValue = await usuario.create({
+      nome,
+      sobrenome,
       username,
       email,
       dataNacimento,
@@ -66,7 +68,7 @@ class UserController {
       throw new Error("Id é obrigatório.");
     }
 
-    const userValue = await user.findByPk(id);
+    const userValue = await usuario.findByPk(id);
 
     if (!userValue) {
       throw new Error("Usuário não encontrado.");
@@ -76,9 +78,9 @@ class UserController {
   }
 
   async update(id, nome, email, senha, nome, sobrenome) {
-    const oldUser = await user.findByPk(id);
+    const oldUser = await usuario.findByPk(id);
     if (email) {
-      const sameEmail = await user.findOne({ where: { email } });
+      const sameEmail = await usuario.findOne({ where: { email } });
       if (sameEmail && sameEmail.id !== id) {
         throw new Error("Email já cadastrado.");
       }
@@ -106,7 +108,7 @@ class UserController {
   }
 
   async find() {
-    return user.findAll();
+    return usuario.findAll();
   }
 
   async login(email, senha) {
@@ -114,7 +116,7 @@ class UserController {
       throw new Error("Email e senha são obrigatórios.");
     }
 
-    const userValue = await user.findOne({ where: { email } });
+    const userValue = await usuario.findOne({ where: { email } });
 
     if (!userValue) {
       throw new Error("[1] Usuário e senha inválidos.");
