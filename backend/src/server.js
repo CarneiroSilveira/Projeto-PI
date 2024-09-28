@@ -1,17 +1,32 @@
 const express = require("express");
 // const cors = require("cors");
 const database = require("./config/database");
-require('dotenv').config()
+require('dotenv').config();
+const UserApi = require("./api/user");
+const UserRouter = require("./routes/user");
+const authMiddleware = require("./middleware/authMiddleware");
 
 const app = express();
 app.use(express.json());
 
 // app.use(cors());
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "OK" });
-});
+// app.get("/", (req, res) => {
+//   res.status(200).json({ message: "OK" });
+// });
 
-app.listen(process.env.PORT, (_) => {
-    console.log(`Server running on port ${process.env.PORT}`);
-});
+app.post("/api/v1/login", UserApi.login);
+app.post("/api/v1/user", UserApi.createUser);
+
+app.use("/api/v1/user", authMiddleware(), UserRouter);
+
+database.db
+  .sync({ force: false })
+  .then((_) => {
+    app.listen(3000, (_) => {
+      console.log("Server running on port 3000");
+    });
+  })
+  .catch((e) => {
+    console.error(`Erro ao inicializar o banco de dados ${e}`);
+  });

@@ -21,13 +21,13 @@ class Usuario {
                 allowNull: false
             },
             roles: {
-                type: DataTypes.ENUM('Aluno', 'Moderador', 'Administrador', 'Professor', ''),
+                type: DataTypes.ENUM('Aluno', 'Moderador', 'Administrador', 'Professor'),
                 defaultValue: 'Aluno',
                 allowNull: false
             },
             genero: {
-                type: DataTypes.STRING(32),
-                allowNull: true
+                type: DataTypes.ENUM('Masculino', 'Feminino', 'Nao-Binario', 'Outro'),
+                allowNull: false
             },
             biografia: {
                 type: DataTypes.STRING(1024),
