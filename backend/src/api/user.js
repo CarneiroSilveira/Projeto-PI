@@ -2,10 +2,10 @@ const UserController = require('../controller/user')
 
 class UserApi {
     async createUser(req, res) {
-        const { nome, email, senha } = req.body
+        const { username, email, senha, dataNacimento, nome, sobrenome, genero } = req.body
 
         try {
-            const user = await UserController.createUser(nome, email, senha)
+            const user = await UserController.createUser(username, email, senha, dataNacimento, nome, sobrenome, genero)
             return res.status(201).send(user)
         } catch (e) {
             return res.status(400).send({ error: `Erro ao criar usuário ${e.message}` })

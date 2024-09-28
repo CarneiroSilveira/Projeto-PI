@@ -5,8 +5,6 @@ const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
 
 router.get("/perfil", authMiddleware(), UserApi.findContext);
-router.post("/login", authMiddleware(), UserApi.login);
-router.post("/cadastro", authMiddleware(), UserApi.createUser);
 router.get("/", authMiddleware(), UserApi.findUsers); // DELETE ME
 
 router.put("/admin/users/:id", authMiddleware(["Administrador"]), UserApi.updateUser);

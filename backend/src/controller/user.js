@@ -83,7 +83,7 @@ class UsuarioController {
     return userValue;
   }
 
-  async update(id, nome, email, senha, nome, sobrenome, biografia, genero) {
+  async update(id, username, email, senha, nome, sobrenome, biografia, genero) {
     const oldUser = await usuario.findByPk(id);
     if (email) {
       const sameEmail = await usuario.findOne({ where: { email } });

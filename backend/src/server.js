@@ -16,7 +16,7 @@ app.use(express.json());
 // });
 
 app.post("/api/v1/login", UserApi.login);
-app.post("/api/v1/user", UserApi.createUser);
+app.post("/api/v1/cadastro", UserApi.createUser);
 
 app.use("/api/v1/user", authMiddleware(), UserRouter);
 
