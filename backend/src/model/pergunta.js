@@ -4,28 +4,28 @@ class Pergunta {
   constructor() {
     this.model = database.db.define("Pergunta", {
       id: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: database.db.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true
       },
       titulo: {
-        type: DataTypes.STRING,
+        type: database.db.STRING,
         allowNull: false
       },
       corpo: {
-        type: DataTypes.TEXT,
+        type: database.db.TEXT,
         allowNull: false
       },
       dataCriacao: {
-        type: DataTypes.DATE,
+        type: database.db.DATE,
         allowNull: false
       },
       dataAtualizacao: {
-        type: DataTypes.DATE,
+        type: database.db.DATE,
         allowNull: true
       },
       validado: {
-        type: DataTypes.ENUM('em-andamento', 'validado'),
+        type: database.db.ENUM('em-andamento', 'validado'),
         allowNull: true
       }
     });

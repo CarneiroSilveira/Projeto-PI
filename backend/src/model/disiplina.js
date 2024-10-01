@@ -4,7 +4,7 @@ class Disciplina {
   constructor() {
     this.model = database.db.define("Disciplina", {
       id: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: database.db.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true
       }

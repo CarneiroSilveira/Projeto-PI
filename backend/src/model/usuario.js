@@ -4,45 +4,47 @@ class Usuario {
     constructor() {
         this.model = database.db.define("Usuario", {
             id: {
-                type: DataTypes.INTEGER.UNSIGNED,
+                type: database.db.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },
             username: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: database.db.STRING,
+                allowNull: false,
+                unique: true
             },
             email: {
-                type: DataTypes.STRING,
-                allowNull: false
+                type: database.db.STRING,
+                allowNull: false,
+                unique: true
             },
             senha: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: false
             },
             roles: {
-                type: DataTypes.ENUM('Aluno', 'Moderador', 'Administrador', 'Professor'),
+                type: database.db.ENUM('Aluno', 'Moderador', 'Administrador', 'Professor'),
                 defaultValue: 'Aluno',
                 allowNull: false
             },
             genero: {
-                type: DataTypes.ENUM('Masculino', 'Feminino', 'Nao-Binario', 'Outro'),
+                type: database.db.ENUM('Masculino', 'Feminino', 'Nao-Binario', 'Outro'),
                 allowNull: false
             },
             biografia: {
-                type: DataTypes.STRING(1024),
+                type: database.db.STRING(1024),
                 allowNull: true
             },
             dataNascimento: {
-                type: DataTypes.DATE,
+                type: database.db.DATE,
                 allowNull: false
             },
             nome: {
-                type: DataTypes.STRING(32),
+                type: database.db.STRING(32),
                 allowNull: false
             },
             sobrenome: {
-                type: DataTypes.STRING(32),
+                type: database.db.STRING(32),
                 allowNull: false
             }
         });

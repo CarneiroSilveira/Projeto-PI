@@ -4,20 +4,20 @@ class RespostaProfessor {
     constructor() {
         this.model = database.db.define("RespostasProfessor", {
             id: {
-                type: DataTypes.INTEGER.UNSIGNED,
+                type: database.db.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },
             corpo: {
-                type: DataTypes.TEXT,
+                type: database.db.TEXT,
                 allowNull: false
             },
             dataCriacao: {
-                type: DataTypes.DATE,
+                type: database.db.DATE,
                 allowNull: false
             },
             dataAtualizacao: {
-                type: DataTypes.DATE,
+                type: database.db.DATE,
                 allowNull: true
             }
         });

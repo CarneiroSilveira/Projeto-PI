@@ -4,32 +4,32 @@ class Aula {
     constructor() {
         this.model = database.db.define("Aula", {
             id: {
-                type: DataTypes.INTEGER.UNSIGNED,
+                type: database.db.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },
             titulo: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: false
             },
             video: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             descricao: {
-                type: DataTypes.TEXT,
+                type: database.db.TEXT,
                 allowNull: false
             },
             dataCriacao: {
-                type: DataTypes.DATE,
+                type: database.db.DATE,
                 allowNull: false
             },
             imagem: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             dataAtualizacao: {
-                type: DataTypes.DATE,
+                type: database.db.DATE,
                 allowNull: true
             }
         });

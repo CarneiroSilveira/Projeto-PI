@@ -4,44 +4,44 @@ class Questoes {
     constructor() {
         this.model = database.db.define("Questoes", {
             id: {
-                type: DataTypes.INTEGER.UNSIGNED,
+                type: database.db.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },
             titulo: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: false
             },
             descricao: {
-                type: DataTypes.TEXT,
+                type: database.db.TEXT,
                 allowNull: false
             },
             imagem: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             a: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             b: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             c: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             d: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             e: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             tipo: {
-                type: DataTypes.ENUM('multipla-escolha', 'descritiva', 'anexo'),
+                type: database.db.ENUM('multipla-escolha', 'descritiva', 'anexo'),
                 allowNull: false
             }
         });

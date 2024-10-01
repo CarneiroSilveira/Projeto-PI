@@ -4,16 +4,16 @@ class RespostaQuestoes {
     constructor() {
         this.model = database.db.define("RespostaQuestoes", {
             id: {
-                type: DataTypes.INTEGER.UNSIGNED,
+                type: database.db.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },
             resposta: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             },
             anexo: {
-                type: DataTypes.STRING,
+                type: database.db.STRING,
                 allowNull: true
             }
         });
