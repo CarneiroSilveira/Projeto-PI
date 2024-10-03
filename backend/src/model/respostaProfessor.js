@@ -1,23 +1,24 @@
 const database = require("../config/database");
+const { DataTypes } = require('sequelize');
 
 class RespostaProfessor {
     constructor() {
         this.model = database.db.define("RespostasProfessor", {
             id: {
-                type: database.db.INTEGER.UNSIGNED,
+                type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },
             corpo: {
-                type: database.db.TEXT,
+                type: DataTypes.TEXT,
                 allowNull: false
             },
             dataCriacao: {
-                type: database.db.DATE,
+                type: DataTypes.DATE,
                 allowNull: false
             },
             dataAtualizacao: {
-                type: database.db.DATE,
+                type: DataTypes.DATE,
                 allowNull: true
             }
         });

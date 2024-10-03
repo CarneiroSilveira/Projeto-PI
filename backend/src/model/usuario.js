@@ -1,50 +1,51 @@
 const database = require("../config/database");
+const { DataTypes } = require('sequelize');
 
 class Usuario {
     constructor() {
         this.model = database.db.define("Usuario", {
             id: {
-                type: database.db.INTEGER.UNSIGNED,
+                type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
                 primaryKey: true
             },
             username: {
-                type: database.db.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
                 unique: true
             },
             email: {
-                type: database.db.STRING,
+                type: DataTypes.STRING,
                 allowNull: false,
                 unique: true
             },
             senha: {
-                type: database.db.STRING,
+                type: DataTypes.STRING,
                 allowNull: false
             },
             roles: {
-                type: database.db.ENUM('Aluno', 'Moderador', 'Administrador', 'Professor'),
+                type: DataTypes.ENUM('Aluno', 'Moderador', 'Administrador', 'Professor'),
                 defaultValue: 'Aluno',
                 allowNull: false
             },
             genero: {
-                type: database.db.ENUM('Masculino', 'Feminino', 'Nao-Binario', 'Outro'),
+                type: DataTypes.ENUM('Masculino', 'Feminino', 'Nao-Binario', 'Outro'),
                 allowNull: false
             },
             biografia: {
-                type: database.db.STRING(1024),
+                type: DataTypes.STRING(1024),
                 allowNull: true
             },
-            dataNascimento: {
-                type: database.db.DATE,
+            nascimento: {
+                type: DataTypes.DATE,
                 allowNull: false
             },
             nome: {
-                type: database.db.STRING(32),
+                type: DataTypes.STRING(32),
                 allowNull: false
             },
             sobrenome: {
-                type: database.db.STRING(32),
+                type: DataTypes.STRING(32),
                 allowNull: false
             }
         });

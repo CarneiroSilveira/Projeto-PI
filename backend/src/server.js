@@ -21,7 +21,7 @@ app.post("/api/v1/cadastro", UserApi.createUser);
 app.use("/api/v1/user", authMiddleware(), UserRouter);
 
 database.db
-  .sync({ force: false })
+  .sync({ force: true })
   .then((_) => {
     app.listen(3000, (_) => {
       console.log("Server running on port 3000");

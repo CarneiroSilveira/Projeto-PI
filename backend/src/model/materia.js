@@ -1,15 +1,16 @@
 const database = require("../config/database");
+const { DataTypes } = require('sequelize');
 
 class Materia {
   constructor() {
     this.model = database.db.define("Materia", {
       id: {
-        type: database.db.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
         primaryKey: true
       },
       nome: {
-        type: database.db.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       }
     });

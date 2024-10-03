@@ -1,4 +1,4 @@
-import '../model'
+import { Usuario, Pergunta, RespostaProfessor, RespostaQuestoes, Aula, Professor, Denuncia, Moderador, Disciplina } from "../model"
 
 // Relacionamentos entre as tabelas
 Usuario.hasMany(Pergunta, { foreignKey: 'id_usuario' });
