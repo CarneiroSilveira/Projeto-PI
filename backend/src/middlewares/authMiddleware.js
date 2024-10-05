@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const user = require('../controller/user')
+const user = require('../services/user')
 require('dotenv').config()
 
 function authMiddleware(roles = []) {

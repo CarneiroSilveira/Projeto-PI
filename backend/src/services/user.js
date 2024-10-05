@@ -1,17 +1,17 @@
-const usuario = require("../model/usuario");
+const usuario = require("../models/usuario");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { nameRegex, usernameRegex, senhaRegex, emailRegex, dataRegex } = require("./../common/regex")
+const { nameRegex, usernameRegex, senhaRegex, emailRegex, dataRegex } = require("../common/regex")
 
 const SECRET_KEY = "exemplo";
 const SALT_VALUE = 10;
 const generos = ['Masculino', 'Feminino', 'Não-Binário', 'Outro']
 
-class UserController {
-  async createUser(username, email, senha, dataNacimento, nome, sobrenome, genero) {
+class UserService {
+  async createUser(username, email, senha, nascimento, nome, sobrenome, genero) {
 
-    if (!username || !email || !senha || !dataNacimento || !nome || !sobrenome || !genero) {
-      throw new Error("Nome de usuario, email, senha, nome, sobrenome, genero e a data de nacimento são obrigatórios.");
+    if (!username || !email || !senha || !nascimento || !nome || !sobrenome || !genero) {
+      throw new Error("Nome de usuario, email, senha, nome, sobrenome, genero e a data de nascimento são obrigatórios.");
     }
 
     // Validação de nome
@@ -42,20 +42,21 @@ class UserController {
       throw new Error("Você deve passar um genero valido!");
     }
 
-    // Validação de dataNacimento
-    if (!dataRegex.test(dataNacimento)) {
+    // Validação de nascimento
+    if (!dataRegex.test(nascimento)) {
       throw new Error("Erro: A data deve estar no formato YYYY-MM-DD e ser uma data válida.");
     }
 
     const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
-
+    nascimento = new Date(nascimento);
+    nascimento = new Date(nascimento.getFullYear(), nascimento.getMonth(), nascimento.getDate());
     const userValue = await usuario.create({
       nome,
       sobrenome,
       genero,
       username,
       email,
-      nascimento:new Date(),
+      nascimento,
       senha: cypherSenha,
     });
 
@@ -76,7 +77,7 @@ class UserController {
     return userValue;
   }
 
-  async update(id, username, email, senha, nome, sobrenome, biografia, genero) {
+  async update(id, username, email, senha, nome, sobrenome, biografia, genero, nascimento) {
     const oldUser = await usuario.findByPk(id);
     if (email) {
       const sameEmail = await usuario.findOne({ where: { email } });
@@ -113,12 +114,19 @@ class UserController {
     if (!generos.includes(genero)) {
       throw new Error("Você deve passar um genero valido!");
     }
+
+    // Validação de nascimento
+    if (!dataRegex.test(nascimento)) {
+      throw new Error("Erro: A data deve estar no formato YYYY-MM-DD e ser uma data válida.");
+    }
+
     oldUser.nome = nome || oldUser.nome;
     oldUser.email = email || oldUser.email;
     oldUser.nome = nome;
     oldUser.biografia = biografia;
     oldUser.genero = genero;
     oldUser.sobrenome = sobrenome;
+    oldUser.nascimento = nascimento
     oldUser.senha = senha
       ? await bcrypt.hash(String(senha), SALT_VALUE)
       : oldUser.senha;
@@ -161,4 +169,4 @@ class UserController {
   }
 }
 
-module.exports = new UserController();
+module.exports = new UserService();

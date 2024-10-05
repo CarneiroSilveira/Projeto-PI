@@ -1,7 +1,7 @@
 const materia = require("../model/materia");
-const { nameRegex } = require("./../common/regex")
+const { nameRegex } = require("../common/regex")
 
-class MateriaController {
+class MateriaService {
     async createMateria(nome) {
         if (!nameRegex.test(nome)) {
             throw new Error("O nome deve conter apenas letras e ter pelo menos 2 caracteres.");
@@ -45,3 +45,5 @@ class MateriaController {
         return;
     }
 }
+
+module.exports = new MateriaService();

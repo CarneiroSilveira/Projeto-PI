@@ -37,7 +37,7 @@ class Usuario {
                 allowNull: true
             },
             nascimento: {
-                type: DataTypes.DATE,
+                type: DataTypes.DATEONLY,
                 allowNull: false
             },
             nome: {

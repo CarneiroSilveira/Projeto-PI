@@ -10,7 +10,7 @@ const senhaRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*
 // Regex para validação de email
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-const dataRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+const dataRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|\d|3)$/;
 
 module.exports = {
     nameRegex,

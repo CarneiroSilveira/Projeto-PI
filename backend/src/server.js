@@ -2,9 +2,9 @@ const express = require("express");
 // const cors = require("cors");
 const database = require("./config/database");
 require('dotenv').config();
-const UserApi = require("./api/user");
+const UserController = require("./controllers/user");
 const UserRouter = require("./routes/user");
-const authMiddleware = require("./middleware/authMiddleware");
+const authMiddleware = require("./middlewares/authMiddleware");
 
 const app = express();
 app.use(express.json());
@@ -15,8 +15,8 @@ app.use(express.json());
 //   res.status(200).json({ message: "OK" });
 // });
 
-app.post("/api/v1/login", UserApi.login);
-app.post("/api/v1/cadastro", UserApi.createUser);
+app.post("/api/v1/login", UserController.login);
+app.post("/api/v1/cadastro", UserController.createUser);
 
 app.use("/api/v1/user", authMiddleware(), UserRouter);
 
