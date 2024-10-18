@@ -1,11 +1,11 @@
 const usuario = require("../models/usuario");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { nameRegex, usernameRegex, senhaRegex, emailRegex, dataRegex } = require("../common/regex")
+const { nameRegex, usernameRegex, senhaRegex, emailRegex, dataRegex } = require("../common/regex");
 
 const SECRET_KEY = "exemplo";
 const SALT_VALUE = 10;
-const generos = ['Masculino', 'Feminino', 'Não-Binário', 'Outro']
+const generos = ['Masculino', 'Feminino', 'Nao-Binario', 'Outro']
 
 class UserService {
   async createUser(username, email, senha, nascimento, nome, sobrenome, genero) {
@@ -105,6 +105,7 @@ class UserService {
     if (!senhaRegex.test(password)) {
       throw new Error("A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um caractere especial.");
     }
+
     // Validação de email
     if (!emailRegex.test(email)) {
       throw new Error("O email deve estar em um formato válido, como exemplo@dominio.com.");
