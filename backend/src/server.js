@@ -5,6 +5,7 @@ require('dotenv').config();
 const UserController = require("./controllers/user");
 const UserRouter = require("./routes/user");
 const authMiddleware = require("./middlewares/authMiddleware");
+const MateriaController = require("./routes/materia");
 
 const app = express();
 app.use(express.json());
@@ -19,6 +20,7 @@ app.post("/api/v1/login", UserController.login);
 app.post("/api/v1/cadastro", UserController.createUser);
 
 app.use("/api/v1/user", authMiddleware(), UserRouter);
+app.use("/api/v1/materias", authMiddleware(), MateriaController);
 
 database.db
   .sync({ force: true })

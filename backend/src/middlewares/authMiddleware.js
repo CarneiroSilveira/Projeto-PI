@@ -1,12 +1,17 @@
 const jwt = require("jsonwebtoken");
-const user = require('../services/user')
-require('dotenv').config()
+const user = require('../services/user');
+require('dotenv').config();
 
 function authMiddleware(roles = []) {
   return (req, res, next) => {
     const authorization = req.headers["authorization"];
-    const token = authorization.split(' ')[1]
-  
+    
+    if (!authorization) {
+      return res.status(400).json({ mensagem: "Token não fornecido" });
+    }
+
+    const token = authorization.split(' ')[1];
+
     if (!token) {
       return res.status(400).json({ mensagem: "Token não fornecido" });
     }
@@ -16,7 +21,7 @@ function authMiddleware(roles = []) {
         return res.status(401).json({ mensagem: "Token inválido" });
       }
 
-      const userLogged = await user.findUser(decoded.id)
+      const userLogged = await user.findUser(decoded.id);
 
       if (!userLogged) {
         return res.status(404).json({ mensagem: "Usuário não encontrado" });

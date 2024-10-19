@@ -1,5 +1,5 @@
-const materia = require("../model/materia");
-const { nameRegex } = require("../common/regex")
+const materia = require("../models/materia");
+const { nameRegex } = require("../common/regex");
 
 class MateriaService {
     async createMateria(nome) {
