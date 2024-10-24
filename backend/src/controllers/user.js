@@ -8,16 +8,49 @@ class UserController {
             const user = await UserService.createUser(username, email, senha, nascimento, nome, sobrenome, genero)
             return res.status(201).send(user)
         } catch (e) {
-            return res.status(400).send({ error: `Erro ao criar usuário ${e.message}` })
+            return res.status(400).send({ error: `Erro ao criar usuário ${e.message}` });
+        }
+    }
+
+    async createAdmin(req, res) {
+        const { username, email, senha, nascimento, nome, sobrenome, genero } = req.body
+
+        try {
+            const user = await UserService.createAdmin(username, email, senha, nascimento, nome, sobrenome, genero)
+            return res.status(201).send(user)
+        } catch (e) {
+            return res.status(400).send({ error: `Erro ao criar Administrador ${e.message}` });
+        }
+    }
+
+    async createProfessor(req, res) {
+        const { username, email, senha, nascimento, nome, sobrenome, genero } = req.body
+
+        try {
+            const user = await UserService.createProfessor(username, email, senha, nascimento, nome, sobrenome, genero)
+            return res.status(201).send(user)
+        } catch (e) {
+            return res.status(400).send({ error: `Erro ao criar Professor ${e.message}` });
+        }
+    }
+
+    async createModerador(req, res) {
+        const { username, email, senha, nascimento, nome, sobrenome, genero } = req.body
+
+        try {
+            const user = await UserService.createModerador(username, email, senha, nascimento, nome, sobrenome, genero)
+            return res.status(201).send(user)
+        } catch (e) {
+            return res.status(400).send({ error: `Erro ao criar Moderador ${e.message}` });
         }
     }
 
     async updateUser(req, res) {
         const id = req.params.id || req.session.id
-        const { nome, email, senha } = req.body
+        const { username, email, senha, nome, sobrenome, biografia, genero, nascimento } = req.body
 
         try {
-            const user = await UserService.update(Number(id), nome, email, senha)
+            const user = await UserService.update(Number(id), username, email, senha, nome, sobrenome, biografia, genero, nascimento)
             return res.status(200).send(user)
         } catch (e) {
             return res.status(400).send({ error: `Erro ao alterar usuário ${e.message}` })

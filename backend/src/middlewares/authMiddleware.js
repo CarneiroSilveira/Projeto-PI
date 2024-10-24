@@ -5,6 +5,11 @@ require('dotenv').config()
 function authMiddleware(roles = []) {
   return (req, res, next) => {
     const authorization = req.headers["authorization"];
+
+    if(!authorization){
+      return res.status(400).json({ mensagem: "Auth Bearer não fornecido" });
+    }
+
     const token = authorization.split(' ')[1]
   
     if (!token) {

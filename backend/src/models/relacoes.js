@@ -1,6 +1,12 @@
 import { Usuario, Pergunta, RespostaProfessor, RespostaQuestoes, Aula, Professor, Denuncia, Moderador, Disciplina } from "../model"
 
 // Relacionamentos entre as tabelas
+Usuario.hasOne(Professor, { foreignKey: 'id_usuario' });
+Professor.belongsTo(Usuario, { foreignKey: 'id_usuario' });
+
+Usuario.hasOne(Moderador, { foreignKey: 'id_usuario' });
+Moderador.hasOne(Usuario, { foreignKey: 'id_usuario' });
+
 Usuario.hasMany(Pergunta, { foreignKey: 'id_usuario' });
 Pergunta.belongsTo(Usuario, { foreignKey: 'id_usuario' });
 
