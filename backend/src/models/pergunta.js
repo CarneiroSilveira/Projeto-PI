@@ -17,14 +17,6 @@ class Pergunta {
         type: DataTypes.TEXT,
         allowNull: false
       },
-      dataCriacao: {
-        type: DataTypes.DATE,
-        allowNull: false
-      },
-      dataAtualizacao: {
-        type: DataTypes.DATE,
-        allowNull: true
-      },
       validado: {
         type: DataTypes.ENUM('em-andamento', 'validado'),
         allowNull: true

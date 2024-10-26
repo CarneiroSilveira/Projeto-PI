@@ -24,10 +24,10 @@ class UserController {
     }
 
     async createProfessor(req, res) {
-        const { username, email, senha, nascimento, nome, sobrenome, genero } = req.body
+        const { username, email, senha, nascimento, nome, sobrenome, genero, cpf } = req.body
 
         try {
-            const user = await UserService.createProfessor(username, email, senha, nascimento, nome, sobrenome, genero)
+            const user = await UserService.createProfessor(username, email, senha, nascimento, nome, sobrenome, genero, cpf)
             return res.status(201).send(user)
         } catch (e) {
             return res.status(400).send({ error: `Erro ao criar Professor ${e.message}` });
@@ -35,10 +35,10 @@ class UserController {
     }
 
     async createModerador(req, res) {
-        const { username, email, senha, nascimento, nome, sobrenome, genero } = req.body
+        const { username, email, senha, nascimento, nome, sobrenome, genero, cpf } = req.body
 
         try {
-            const user = await UserService.createModerador(username, email, senha, nascimento, nome, sobrenome, genero)
+            const user = await UserService.createModerador(username, email, senha, nascimento, nome, sobrenome, genero, cpf)
             return res.status(201).send(user)
         } catch (e) {
             return res.status(400).send({ error: `Erro ao criar Moderador ${e.message}` });

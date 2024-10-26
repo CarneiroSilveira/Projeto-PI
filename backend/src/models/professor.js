@@ -1,5 +1,6 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
+const usuario = require("./usuario");
 
 class Professor {
   constructor() {
@@ -12,6 +13,15 @@ class Professor {
       cpf: {
         type: DataTypes.STRING(32),
         allowNull: false,
+        unique: true,
+      },
+      id_usuario: {
+        field: 'id_usuario',
+        type: DataTypes.INTEGER,
+        references: {
+          model: usuario,
+          key: 'id'
+        }
       },
     });
   }

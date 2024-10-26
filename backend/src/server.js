@@ -5,6 +5,7 @@ require('dotenv').config();
 const UserController = require("./controllers/user");
 const UserRouter = require("./routes/user");
 const MateriaController = require("./routes/materia");
+// const authMiddleware = require("./middlewares/authMiddleware");
 
 const app = express();
 app.use(express.json());
@@ -25,7 +26,7 @@ app.use("/api/v1/user", UserRouter);
 app.use("/api/v1/materias", MateriaController);
 
 database.db
-  .sync({ force: true })
+  .sync({ force: true }) // Quando iniciar a fase beta converta para false
   .then((_) => {
     app.listen(3000, (_) => {
       console.log("Server running on port 3000");

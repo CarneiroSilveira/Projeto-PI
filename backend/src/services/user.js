@@ -1,14 +1,16 @@
 const usuario = require("../models/usuario");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { nameRegex, usernameRegex, senhaRegex, emailRegex, dataRegex } = require("../common/regex");
+const { nameRegex, usernameRegex, senhaRegex, emailRegex, dataRegex, cpfRegex } = require("../common/regex");
+const Professor = require("../models/professor");
+const Moderador = require("../models/moderador");
 
 const SECRET_KEY = "exemplo";
 const SALT_VALUE = 10;
 const generos = ['Masculino', 'Feminino', 'Nao-Binario', 'Outro']
 
 class UserService {
-  async createAluno(username, email, senha, nascimento, nome, sobrenome, genero) {
+  async createUser(username, email, senha, nascimento, nome, sobrenome, genero) {
 
     if (!username || !email || !senha || !nascimento || !nome || !sobrenome || !genero) {
       throw new Error("Nome de usuario, email, senha, nome, sobrenome, genero e a data de nascimento são obrigatórios.");
@@ -117,9 +119,9 @@ class UserService {
 
     return userValue;
   }
-  async createProfessor(username, email, senha, nascimento, nome, sobrenome, genero) {
-    if (!username || !email || !senha || !nascimento || !nome || !sobrenome || !genero) {
-      throw new Error("Nome de usuario, email, senha, nome, sobrenome, genero e a data de nascimento são obrigatórios.");
+  async createProfessor(username, email, senha, nascimento, nome, sobrenome, genero, cpf) {
+    if (!username || !email || !senha || !nascimento || !nome || !sobrenome || !genero || !cpf) {
+      throw new Error("Nome de usuario, email, senha, nome, sobrenome, genero, a data de nascimento e cpf são obrigatórios.");
     }
 
     // Validação de nome
@@ -153,6 +155,10 @@ class UserService {
     // Validação de nascimento
     if (!dataRegex.test(nascimento)) {
       throw new Error("Erro: A data deve estar no formato YYYY-MM-DD e ser uma data válida.");
+    }
+    // Validação de cpf
+    if (!cpfRegex.test(cpf)) {
+      throw new Error("Erro: O CPF informado é inválido. Verifique se possui 11 dígitos e está no formato correto (ex: 123.456.789-10).");
     }
 
     const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
@@ -167,13 +173,16 @@ class UserService {
       nascimento,
       senha: cypherSenha,
       roles: "Professor",
-    });
+      professor: {
+        cpf: cpf
+      },
+    }, { include: [{ model: Professor, as: 'professor' }] });
 
     return userValue;
   }
 
-  async createModerador(username, email, senha, nascimento, nome, sobrenome, genero) {
-    if (!username || !email || !senha || !nascimento || !nome || !sobrenome || !genero) {
+  async createModerador(username, email, senha, nascimento, nome, sobrenome, genero, cpf) {
+    if (!username || !email || !senha || !nascimento || !nome || !sobrenome || !genero || !cpf) {
       throw new Error("Nome de usuario, email, senha, nome, sobrenome, genero e a data de nascimento são obrigatórios.");
     }
 
@@ -210,6 +219,10 @@ class UserService {
       throw new Error("Erro: A data deve estar no formato YYYY-MM-DD e ser uma data válida.");
     }
 
+    if (!cpfRegex.test(cpf)) {
+      throw new Error("Erro: O CPF informado é inválido. Verifique se possui 11 dígitos e está no formato correto (ex: 123.456.789-10).");
+    }
+
     const cypherSenha = await bcrypt.hash(String(senha), SALT_VALUE);
     nascimento = new Date(nascimento);
     nascimento = new Date(nascimento.getFullYear(), nascimento.getMonth(), nascimento.getDate());
@@ -222,7 +235,10 @@ class UserService {
       nascimento,
       senha: cypherSenha,
       roles: "Moderador",
-    });
+      moderador: {
+        cpf: cpf
+      },
+    }, { include: [{ model: Moderador, as: 'moderador' }] });
 
     return userValue;
   }
@@ -266,7 +282,7 @@ class UserService {
     }
 
     // Validação de senha
-    if (!senhaRegex.test(password)) {
+    if (!senhaRegex.test(senha)) {
       throw new Error("A senha deve ter pelo menos 8 caracteres, incluindo uma letra maiúscula, uma minúscula, um número e um caractere especial.");
     }
 
@@ -290,7 +306,6 @@ class UserService {
 
     oldUser.nome = nome || oldUser.nome;
     oldUser.email = email || oldUser.email;
-    oldUser.nome = nome;
     oldUser.biografia = biografia;
     oldUser.genero = genero;
     oldUser.sobrenome = sobrenome;
@@ -328,7 +343,7 @@ class UserService {
       throw new Error("[1] Usuário e senha inválidos.");
     }
 
-    const senhaValida = bcrypt.compare(String(senha), userValue.senha);
+    const senhaValida = await bcrypt.compare(String(senha), userValue.senha);
     if (!senhaValida) {
       throw new Error("[2] Usuário e senha inválidos.");
     }

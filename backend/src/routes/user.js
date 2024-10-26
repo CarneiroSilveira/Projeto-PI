@@ -11,6 +11,8 @@ router.put("/admin/users/:id", authMiddleware(["Administrador"]), UserController
 router.delete("/admin/users/:id", authMiddleware(["Administrador"]), UserController.deleteUser);
 router.get("/admin/users", authMiddleware(["Administrador"]), UserController.findUsers); // DELETE ME
 // router.post("/admin/newadmin", authMiddleware(["Administrador"]), UserController.createAdmin); Utilizar somente quando iniciar a versão beta
+// router.post("/admin/newmod", authMiddleware(["Administrador"]), UserController.createModerador); Utilizar somente quando iniciar a versão beta
+// router.post("/admin/newprof", authMiddleware(["Administrador"]), UserController.createProfessor); Utilizar somente quando iniciar a versão beta
 
 // O authMiddleware possui 3 tipos de uso principais: quando ele não é utilizado na rota é quando vc diz que ela pode ser acessada por qualquer usuário estando logado ou não.
 // Quando ele é utilizado na rota mas não recebe nada ex: authMiddleware(). Neste modo apenas usuários logados podem acessar está rota.

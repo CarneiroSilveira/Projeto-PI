@@ -17,10 +17,6 @@ class Denuncia {
         type: DataTypes.STRING(1024),
         allowNull: false
       },
-      dataCriacao: {
-        type: DataTypes.DATE,
-        allowNull: false
-      }
     });
   }
 }

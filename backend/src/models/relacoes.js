@@ -1,11 +1,11 @@
-import { Usuario, Pergunta, RespostaProfessor, RespostaQuestoes, Aula, Professor, Denuncia, Moderador, Disciplina } from "../model"
+import { Usuario, Pergunta, RespostaProfessor, RespostaQuestoes, Aula, Professor, Denuncia, Moderador, Disciplina } from "../models"
 
 // Relacionamentos entre as tabelas
 Usuario.hasOne(Professor, { foreignKey: 'id_usuario' });
 Professor.belongsTo(Usuario, { foreignKey: 'id_usuario' });
 
 Usuario.hasOne(Moderador, { foreignKey: 'id_usuario' });
-Moderador.hasOne(Usuario, { foreignKey: 'id_usuario' });
+Moderador.belongsTo(Usuario, { foreignKey: 'id_usuario' });
 
 Usuario.hasMany(Pergunta, { foreignKey: 'id_usuario' });
 Pergunta.belongsTo(Usuario, { foreignKey: 'id_usuario' });
@@ -44,3 +44,5 @@ RespostaQuestoes.belongsTo(Questoes, { foreignKey: 'id_questoes' });
 Pergunta.belongsTo(Questoes, { foreignKey: 'id_questoes' });
 
 Pergunta.belongsTo(Aula, { foreignKey: 'id_aula' });
+
+export default { Usuario, Pergunta, RespostaProfessor, RespostaQuestoes, Aula, Professor, Denuncia, Moderador, Disciplina, Materia, Questoes };

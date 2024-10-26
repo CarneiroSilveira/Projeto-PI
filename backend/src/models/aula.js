@@ -21,18 +21,10 @@ class Aula {
                 type: DataTypes.TEXT,
                 allowNull: false
             },
-            dataCriacao: {
-                type: DataTypes.DATE,
-                allowNull: false
-            },
             imagem: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            dataAtualizacao: {
-                type: DataTypes.DATE,
-                allowNull: true
-            }
         });
     }
 }

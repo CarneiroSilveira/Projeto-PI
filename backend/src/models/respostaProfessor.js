@@ -13,14 +13,6 @@ class RespostaProfessor {
                 type: DataTypes.TEXT,
                 allowNull: false
             },
-            dataCriacao: {
-                type: DataTypes.DATE,
-                allowNull: false
-            },
-            dataAtualizacao: {
-                type: DataTypes.DATE,
-                allowNull: true
-            }
         });
     }
 }
