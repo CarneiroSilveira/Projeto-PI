@@ -1,6 +1,6 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
-const usuario = require("./usuario");
+const Usuario = require('./usuario');
 
 class Moderador {
   constructor() {
@@ -9,21 +9,17 @@ class Moderador {
         type: DataTypes.INTEGER.UNSIGNED,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false
       },
       cpf: {
         type: DataTypes.STRING(32),
         allowNull: false,
         unique: true,
       },
-      id_usuario: {
-        field: 'id_usuario',
-        type: DataTypes.INTEGER,
-        references: {
-          model: usuario,
-          key: 'id'
-        }
-      },
     });
+  }
+  static associate() {
+    this.model.belongsTo(Usuario, { foreignKey: 'id' });
   }
 }
 

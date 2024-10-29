@@ -1,5 +1,8 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
+const Pergunta = require('./pergunta');
+const Moderador = require('./moderador');
+const RespostaProfessor = require('./respostaProfessor');
 
 class Denuncia {
   constructor() {
@@ -7,7 +10,8 @@ class Denuncia {
       id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        allowNull: false
       },
       descricao: {
         type: DataTypes.STRING(1024),
@@ -17,7 +21,25 @@ class Denuncia {
         type: DataTypes.STRING(1024),
         allowNull: false
       },
+      idPergunta: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false
+      },
+      idModerador: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: true
+      },
+      idResposta: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: true
+      }
+
     });
+  }
+  static associate() {
+    this.model.belongsTo(Pergunta, { foreignKey: 'idPergunta' });
+    this.model.belongsTo(Moderador, { foreignKey: 'idModerador' });
+    this.model.belongsTo(RespostaProfessor, { foreignKey: 'idResposta' });
   }
 }
 

@@ -1,6 +1,6 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
-const usuario = require("./usuario");
+const Usuario = require("./usuario");
 
 class Professor {
   constructor() {
@@ -15,15 +15,10 @@ class Professor {
         allowNull: false,
         unique: true,
       },
-      id_usuario: {
-        field: 'id_usuario',
-        type: DataTypes.INTEGER,
-        references: {
-          model: usuario,
-          key: 'id'
-        }
-      },
     });
+  }
+  static associate() {
+    this.model.belongsTo(Usuario, { foreignKey: 'id' });
   }
 }
 

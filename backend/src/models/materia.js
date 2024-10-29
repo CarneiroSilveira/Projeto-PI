@@ -7,7 +7,8 @@ class Materia {
       id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        allowNull: false
       },
       nome: {
         type: DataTypes.STRING,

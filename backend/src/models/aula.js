@@ -1,5 +1,7 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
+const Professor = require('./professor');
+const Materia = require('./materia');
 
 class Aula {
     constructor() {
@@ -7,7 +9,8 @@ class Aula {
             id: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
-                primaryKey: true
+                primaryKey: true,
+                allowNull: false
             },
             titulo: {
                 type: DataTypes.STRING,
@@ -25,8 +28,19 @@ class Aula {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            idProfessor: {
+                type: DataTypes.INTEGER.UNSIGNED,
+                allowNull: false
+            },
+            idMateria: {
+                type: DataTypes.INTEGER.UNSIGNED,
+                allowNull: false
+            },
         });
     }
+    static associate() {
+        this.model.belongsTo(Professor, { foreignKey: 'idProfessor' });
+        this.model.belongsTo(Materia, { foreignKey: 'idMateria' });
+    }
 }
-
 module.exports = new Aula().model;
