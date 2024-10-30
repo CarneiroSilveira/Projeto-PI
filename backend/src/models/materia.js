@@ -16,6 +16,11 @@ class Materia {
       }
     });
   }
+  static associate(models) {
+    this.hasMany(models.Questoes, { foreignKey: 'idMateria' });
+    this.hasMany(models.Disciplina, { foreignKey: 'idMateria' });
+    this.hasMany(models.Aula, { foreignKey: 'idMateria' });
+  }
 }
 
 module.exports = new Materia().model;

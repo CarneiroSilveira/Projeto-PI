@@ -23,9 +23,9 @@ class Disciplina {
       }
     });
   }
-  static associate() {
-    this.model.belongsTo(Professor, { foreignKey: 'idProfessor' });
-    this.model.belongsTo(Materia, { foreignKey: 'idMateria' });
+  static associate(models) {
+    this.belongsTo(models.Professor, { foreignKey: 'idProfessor' });
+    this.belongsTo(models.Materia, { foreignKey: 'idMateria' });
   }
 }
 

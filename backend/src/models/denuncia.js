@@ -36,10 +36,10 @@ class Denuncia {
 
     });
   }
-  static associate() {
-    this.model.belongsTo(Pergunta, { foreignKey: 'idPergunta' });
-    this.model.belongsTo(Moderador, { foreignKey: 'idModerador' });
-    this.model.belongsTo(RespostaProfessor, { foreignKey: 'idResposta' });
+  static associate(models) {
+    this.belongsTo(models.Pergunta, { foreignKey: 'idPergunta' });
+    this.belongsTo(models.Moderador, { foreignKey: 'idModerador' });
+    this.belongsTo(models.RespostaProfessor, { foreignKey: 'idResposta' });
   }
 }
 

@@ -19,24 +19,28 @@ const Materia = require('./models/materia');
 const Pergunta = require('./models/pergunta');
 const RespostaQuestoes = require('./models/respostaQuestoes');
 
-RespostaProfessor.associate();
-Questoes.associate();
-Moderador.associate();
-Denuncia.associate();
-Professor.associate();
-Disciplina.associate();
-Aula.associate();
-Pergunta.associate();
-RespostaQuestoes.associate();
+const models = {
+  Usuario,
+  RespostaProfessor,
+  Questoes,
+  Moderador,
+  Denuncia,
+  Professor,
+  Disciplina,
+  Aula,
+  Materia,
+  Pergunta,
+  RespostaQuestoes
+};
+
+Object.keys(models).forEach(modelName => {
+  if (models[modelName].associate) {
+    models[modelName].associate(models);
+  }
+});
 
 const app = express();
 app.use(express.json());
-
-// app.use(cors());
-
-// app.get("/", (req, res) => {
-//   res.status(200).json({ message: "OK" });
-// });
 
 app.post("/api/v1/login", UserController.login);
 app.post("/api/v1/cadastro", UserController.createUser);
@@ -58,16 +62,4 @@ database.db
     console.error(`Erro ao inicializar o banco de dados ${e}`);
   });
 
-module.exports = {
-  Usuario,
-  RespostaProfessor,
-  Questoes,
-  Moderador,
-  Denuncia,
-  Professor,
-  Disciplina,
-  Aula,
-  Materia,
-  Pergunta,
-  RespostaQuestoes
-};
+module.exports = models;

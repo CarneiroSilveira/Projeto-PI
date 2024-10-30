@@ -38,9 +38,10 @@ class Aula {
             },
         });
     }
-    static associate() {
-        this.model.belongsTo(Professor, { foreignKey: 'idProfessor' });
-        this.model.belongsTo(Materia, { foreignKey: 'idMateria' });
+    static associate(models) {
+        this.belongsTo(models.Professor, { foreignKey: 'idProfessor' });
+        this.belongsTo(models.Materia, { foreignKey: 'idMateria' });
+        this.hasMany(models.Pergunta, { foreignKey: 'idAula' });
     }
 }
 module.exports = new Aula().model;

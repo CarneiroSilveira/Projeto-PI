@@ -38,10 +38,12 @@ class Pergunta {
       }
     });
   }
-  static associate() {
-    this.model.belongsTo(Usuario, { foreignKey: 'idUsuario' });
-    this.model.belongsTo(Questoes, { foreignKey: 'idQuestoes' });
-    this.model.belongsTo(Aula, { foreignKey: 'idAula' });
+  static associate(models) {
+    this.belongsTo(models.Usuario, { foreignKey: 'idUsuario' });
+    this.belongsTo(models.Aula, { foreignKey: 'idAula' });
+    this.belongsTo(models.Questoes, { foreignKey: 'idQuestoes' });
+    this.hasMany(models.RespostaProfessor, { foreignKey: 'idPergunta' });
+    this.hasMany(models.Denuncia, { foreignKey: 'idPergunta' });
   }
 }
 

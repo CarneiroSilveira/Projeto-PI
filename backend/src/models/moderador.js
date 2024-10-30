@@ -18,8 +18,9 @@ class Moderador {
       },
     });
   }
-  static associate() {
-    this.model.belongsTo(Usuario, { foreignKey: 'id' });
+  static associate(models) {
+    this.belongsTo(models.Usuario, { foreignKey: 'id' });
+    this.hasMany(models.Denuncia, { foreignKey: 'idModerador' });
   }
 }
 

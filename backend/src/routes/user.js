@@ -7,9 +7,9 @@ const router = express.Router();
 router.get("/perfil", authMiddleware(), UserController.findContext);
 router.get("/", authMiddleware(), UserController.findUsers); // DELETE ME
 
-router.put("/admin/users/:id", authMiddleware(["Administrador"]), UserController.updateUser);
-router.delete("/admin/users/:id", authMiddleware(["Administrador"]), UserController.deleteUser);
-router.get("/admin/users", authMiddleware(["Administrador"]), UserController.findUsers); // DELETE ME
+router.put("/admin/users/:id", authMiddleware(["Administrador", "Professor", "Moderador"]), UserController.updateUser);
+router.delete("/admin/users/:id", authMiddleware(["Administrador", "Professor", "Moderador"]), UserController.deleteUser);
+router.get("/admin/users", authMiddleware(["Administrador", "Professor", "Moderador"]), UserController.findUsers); // DELETE ME
 // router.post("/admin/newadmin", authMiddleware(["Administrador"]), UserController.createAdmin); Utilizar somente quando iniciar a versão beta
 // router.post("/admin/newmod", authMiddleware(["Administrador"]), UserController.createModerador); Utilizar somente quando iniciar a versão beta
 // router.post("/admin/newprof", authMiddleware(["Administrador"]), UserController.createProfessor); Utilizar somente quando iniciar a versão beta

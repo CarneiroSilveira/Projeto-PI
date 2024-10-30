@@ -51,6 +51,12 @@ class Usuario {
             }
         });
     }
+    static associate(models) {
+        this.hasMany(models.RespostaProfessor, { foreignKey: 'idUsuario' });
+        this.hasMany(models.Pergunta, { foreignKey: 'idUsuario' });
+        this.hasMany(models.RespostaQuestoes, { foreignKey: 'idUsuario' });
+        this.hasOne(models.Moderador, { foreignKey: 'id' });
+    }
 };
 
 module.exports = new Usuario().model;

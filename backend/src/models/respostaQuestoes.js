@@ -30,9 +30,9 @@ class RespostaQuestoes {
             },
         });
     }
-    static associate() {
-        this.model.belongsTo(Usuario, { foreignKey: 'idUsuario' });
-        this.model.belongsTo(Questoes, { foreignKey: 'idQuestoes' });
+    static associate(models) {
+        this.belongsTo(models.Usuario, { foreignKey: 'idUsuario' });
+        this.belongsTo(models.Questoes, { foreignKey: 'idQuestoes' });
     }
 }
 

@@ -17,8 +17,11 @@ class Professor {
       },
     });
   }
-  static associate() {
-    this.model.belongsTo(Usuario, { foreignKey: 'id' });
+  static associate(models) {
+    this.hasMany(models.RespostaProfessor, { foreignKey: 'idProfessor' });
+    this.hasMany(models.Questoes, { foreignKey: 'idProfessor' });
+    this.hasMany(models.Disciplina, { foreignKey: 'idProfessor' });
+    this.hasMany(models.Aula, { foreignKey: 'idProfessor' });
   }
 }
 

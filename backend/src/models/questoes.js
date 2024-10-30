@@ -58,9 +58,11 @@ class Questoes {
             },
         });
     }
-    static associate() {
-        this.model.belongsTo(Professor, { foreignKey: 'idProfessor' });
-        this.model.belongsTo(Materia, { foreignKey: 'idMateria' });
+    static associate(models) {
+        this.belongsTo(models.Professor, { foreignKey: 'idProfessor' });
+        this.belongsTo(models.Materia, { foreignKey: 'idMateria' });
+        this.hasMany(models.Pergunta, { foreignKey: 'idQuestoes' });
+        this.hasMany(models.RespostaQuestoes, { foreignKey: 'idQuestoes' });
     }
 }
 
