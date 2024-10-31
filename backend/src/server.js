@@ -7,38 +7,6 @@ const UserRouter = require("./routes/user");
 const MateriaController = require("./routes/materia");
 // const authMiddleware = require("./middlewares/authMiddleware");
 
-const Usuario = require('./models/usuario');
-const RespostaProfessor = require('./models/respostaProfessor');
-const Questoes = require('./models/questoes');
-const Moderador = require('./models/moderador');
-const Denuncia = require('./models/denuncia');
-const Professor = require('./models/professor');
-const Disciplina = require('./models/disciplina');
-const Aula = require('./models/aula');
-const Materia = require('./models/materia');
-const Pergunta = require('./models/pergunta');
-const RespostaQuestoes = require('./models/respostaQuestoes');
-
-const models = {
-  Usuario,
-  RespostaProfessor,
-  Questoes,
-  Moderador,
-  Denuncia,
-  Professor,
-  Disciplina,
-  Aula,
-  Materia,
-  Pergunta,
-  RespostaQuestoes
-};
-
-Object.keys(models).forEach(modelName => {
-  if (models[modelName].associate) {
-    models[modelName].associate(models);
-  }
-});
-
 const app = express();
 app.use(express.json());
 

@@ -24,7 +24,8 @@ class UserController {
     }
 
     async createProfessor(req, res) {
-        const { username, email, senha, nascimento, nome, sobrenome, genero, cpf } = req.body
+        const cpf = req.body.professor.cpf
+        const { username, email, senha, nascimento, nome, sobrenome, genero } = req.body
 
         try {
             const user = await UserService.createProfessor(username, email, senha, nascimento, nome, sobrenome, genero, cpf)

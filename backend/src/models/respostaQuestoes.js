@@ -1,7 +1,7 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
-const Usuario = require('./usuario');
-const Questoes = require('./questoes');
+const Usuario = require("./usuario");
+const Questoes = require("./questoes");
 
 class RespostaQuestoes {
     constructor() {
@@ -29,10 +29,8 @@ class RespostaQuestoes {
                 allowNull: false
             },
         });
-    }
-    static associate(models) {
-        this.belongsTo(models.Usuario, { foreignKey: 'idUsuario' });
-        this.belongsTo(models.Questoes, { foreignKey: 'idQuestoes' });
+        this.model.belongsTo(Usuario, { foreignKey: 'idUsuario' });
+        this.model.belongsTo(Questoes, { foreignKey: 'idQuestoes' });
     }
 }
 

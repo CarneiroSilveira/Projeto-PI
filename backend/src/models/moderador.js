@@ -1,6 +1,7 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
-const Usuario = require('./usuario');
+const Usuario = require("./usuario");
+const Denuncia = require("./denuncia");
 
 class Moderador {
   constructor() {
@@ -17,10 +18,8 @@ class Moderador {
         unique: true,
       },
     });
-  }
-  static associate(models) {
-    this.belongsTo(models.Usuario, { foreignKey: 'id' });
-    this.hasMany(models.Denuncia, { foreignKey: 'idModerador' });
+    this.model.belongsTo(Usuario, { foreignKey: 'id' });
+    this.model.hasMany(Denuncia, { foreignKey: 'idModerador' });
   }
 }
 

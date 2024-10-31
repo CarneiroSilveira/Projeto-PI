@@ -158,6 +158,7 @@ class UserService {
     }
     // Validação de cpf
     if (!cpfRegex.test(cpf)) {
+      console.log(cpf)
       throw new Error("Erro: O CPF informado é inválido. Verifique se possui 11 dígitos e está no formato correto (ex: 123.456.789-10).");
     }
 

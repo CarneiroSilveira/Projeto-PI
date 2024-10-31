@@ -1,7 +1,8 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
-const Professor = require('./professor');
-const Materia = require('./materia');
+const Professor = require("./professor");
+const Materia = require("./materia");
+const Pergunta = require("./pergunta");
 
 class Aula {
     constructor() {
@@ -37,11 +38,9 @@ class Aula {
                 allowNull: false
             },
         });
-    }
-    static associate(models) {
-        this.belongsTo(models.Professor, { foreignKey: 'idProfessor' });
-        this.belongsTo(models.Materia, { foreignKey: 'idMateria' });
-        this.hasMany(models.Pergunta, { foreignKey: 'idAula' });
+        this.model.belongsTo(Professor, { foreignKey: 'idProfessor' });
+        this.model.belongsTo(Materia, { foreignKey: 'idMateria' });
+        this.model.hasMany(Pergunta, { foreignKey: 'idAula' });
     }
 }
 module.exports = new Aula().model;
