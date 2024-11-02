@@ -1,10 +1,5 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
-const RespostaProfessor = require("./respostaProfessor");
-const RespostaQuestoes = require("./respostaQuestoes");
-const Pergunta = require("./pergunta");
-const Moderador = require("./moderador");
-const Professor = require("./professor");
 
 class Usuario {
     constructor() {

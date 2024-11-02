@@ -7,6 +7,18 @@ const UserRouter = require("./routes/user");
 const MateriaController = require("./routes/materia");
 // const authMiddleware = require("./middlewares/authMiddleware");
 
+const Usuario = require('./models/usuario');
+const RespostaProfessor = require('./models/respostaProfessor');
+const Questoes = require('./models/questoes');
+const Moderador = require('./models/moderador');
+const Denuncia = require('./models/denuncia');
+const Professor = require('./models/professor');
+const Disciplina = require('./models/disciplina');
+const Aula = require('./models/aula');
+const Materia = require('./models/materia');
+const Pergunta = require('./models/pergunta');
+const RespostaQuestoes = require('./models/respostaQuestoes');
+
 const app = express();
 app.use(express.json());
 
@@ -29,5 +41,3 @@ database.db
   .catch((e) => {
     console.error(`Erro ao inicializar o banco de dados ${e}`);
   });
-
-module.exports = models;

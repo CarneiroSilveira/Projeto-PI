@@ -2,7 +2,7 @@ const database = require("../config/database");
 const { DataTypes } = require('sequelize');
 const Pergunta = require("./pergunta");
 const Moderador = require("./moderador");
-const RespostaProfessor = require("./respostaProfessor");
+const respostaProfessor = require("./respostaProfessor");
 
 class Denuncia {
   constructor() {
@@ -23,21 +23,38 @@ class Denuncia {
       },
       idPergunta: {
         type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: Pergunta,
+          key: "id"
+        }
       },
       idModerador: {
         type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: true
+        allowNull: true,
+        references: {
+          model: Moderador,
+          key: "id"
+        }
       },
-      idResposta: {
+      idRespostaProfessor: {
         type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: true
+        allowNull: true,
+        references: {
+          model: respostaProfessor,
+          key: "id"
+        }
       }
 
     });
-    this.model.belongsTo(Pergunta, { foreignKey: 'idPergunta' });
-    this.model.belongsTo(Moderador, { foreignKey: 'idModerador' });
-    this.model.belongsTo(RespostaProfessor, { foreignKey: 'idResposta' });
+    this.model.hasMany(Moderador, { foreignKey: "idModerador" });
+    Moderador.belongsTo(this.model, { foreignKey: "idModerador" });
+
+    this.model.hasMany(Pergunta, { foreignKey: "idPergunta" });
+    Pergunta.belongsTo(this.model, { foreignKey: "idPergunta" });
+
+    this.model.hasMany(respostaProfessor, { foreignKey: "idRespostaProfessor" });
+    respostaProfessor.belongsTo(this.model, { foreignKey: "idRespostaProfessor" });
   }
 }
 

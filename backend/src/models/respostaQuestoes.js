@@ -22,15 +22,26 @@ class RespostaQuestoes {
             },
             idUsuario: {
                 type: DataTypes.INTEGER.UNSIGNED,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: Usuario,
+                    key: "id"
+                }
             },
             idQuestoes: {
                 type: DataTypes.INTEGER.UNSIGNED,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: Questoes,
+                    key: "id"
+                }
             },
         });
-        this.model.belongsTo(Usuario, { foreignKey: 'idUsuario' });
-        this.model.belongsTo(Questoes, { foreignKey: 'idQuestoes' });
+        this.model.hasMany(Usuario, { foreignKey: 'idUsuario' });
+        Usuario.belongsTo(this.model, { foreignKey: 'idUsuario' });
+
+        this.model.hasMany(Questoes, { foreignKey: 'idQuestoes' });
+        Questoes.belongsTo(this.model, { foreignKey: 'idQuestoes' });
     }
 }
 

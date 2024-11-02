@@ -3,7 +3,6 @@ const { DataTypes } = require('sequelize');
 const Usuario = require("./usuario");
 const Professor = require("./professor");
 const Pergunta = require("./pergunta");
-const Denuncia = require("./denuncia");
 
 class RespostaProfessor {
     constructor() {
@@ -20,29 +19,37 @@ class RespostaProfessor {
             },
             idUsuario: {
                 type: DataTypes.INTEGER.UNSIGNED,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: Usuario,
+                    key: "id"
+                }
             },
             idProfessor: {
                 type: DataTypes.INTEGER.UNSIGNED,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: Professor,
+                    key: "id"
+                }
             },
             idPergunta: {
                 type: DataTypes.INTEGER.UNSIGNED,
-                allowNull: false
+                allowNull: false,
+                references: {
+                    model: Pergunta,
+                    key: "id"
+                }
             },
-            dataCriacao: {
-                type: DataTypes.DATE,
-                allowNull: false
-            },
-            dataAtualizacao: {
-                type: DataTypes.DATE,
-                allowNull: true
-            }
         });
-        this.model.belongsTo(Usuario, { foreignKey: 'idUsuario' });
-        this.model.belongsTo(Professor, { foreignKey: 'idProfessor' });
-        this.model.belongsTo(Pergunta, { foreignKey: 'idPergunta' });
-        this.model.hasMany(Denuncia, { foreignKey: 'idResposta' });
+        this.model.hasMany(Usuario, { foreignKey: 'idUsuario' });
+        Usuario.belongsTo(this.model, { foreignKey: 'idUsuario' });
+
+        this.model.hasMany(Professor, { foreignKey: 'idProfessor' });
+        Professor.belongsTo(this.model, { foreignKey: 'idProfessor' });
+
+        this.model.hasMany(Pergunta, { foreignKey: 'idPergunta' });
+        Pergunta.belongsTo(this.model, { foreignKey: 'idPergunta' });
     }
 }
 

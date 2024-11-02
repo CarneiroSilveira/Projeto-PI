@@ -1,7 +1,6 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
 const Usuario = require("./usuario");
-const Denuncia = require("./denuncia");
 
 class Moderador {
   constructor() {
@@ -17,9 +16,14 @@ class Moderador {
         allowNull: false,
         unique: true,
       },
+
+      // Lembrar de fazer a foreingKey nas as relações one a one no 
+      // usuarioId: {
+
+      // }
     });
-    this.model.belongsTo(Usuario, { foreignKey: 'id' });
-    this.model.hasMany(Denuncia, { foreignKey: 'idModerador' });
+    this.model.hasOne(Usuario, { foreignKey: 'usuarioId' });
+    Usuario.belongsTo(this.model, { foreignKey: 'usuarioId' });
   }
 }
 

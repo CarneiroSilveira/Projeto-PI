@@ -1,8 +1,5 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
-const Questoes = require("./questoes");
-const Disciplina = require("./disciplina");
-const Aula = require("./aula");
 
 class Materia {
   constructor() {
@@ -18,9 +15,6 @@ class Materia {
         allowNull: false
       }
     });
-    this.model.hasMany(Questoes, { foreignKey: 'idMateria' });
-    this.model.hasMany(Disciplina, { foreignKey: 'idMateria' });
-    this.model.hasMany(Aula, { foreignKey: 'idMateria' });
   }
 }
 

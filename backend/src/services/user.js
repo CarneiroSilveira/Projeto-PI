@@ -158,7 +158,6 @@ class UserService {
     }
     // Validação de cpf
     if (!cpfRegex.test(cpf)) {
-      console.log(cpf)
       throw new Error("Erro: O CPF informado é inválido. Verifique se possui 11 dígitos e está no formato correto (ex: 123.456.789-10).");
     }
 
@@ -177,7 +176,7 @@ class UserService {
       professor: {
         cpf: cpf
       },
-    }, { include: [{ model: Professor, as: 'professor' }] });
+    }, { include: [{ model: Professor, as: 'Professor' }] });
 
     return userValue;
   }
@@ -221,6 +220,7 @@ class UserService {
     }
 
     if (!cpfRegex.test(cpf)) {
+      console.log(cpf)
       throw new Error("Erro: O CPF informado é inválido. Verifique se possui 11 dígitos e está no formato correto (ex: 123.456.789-10).");
     }
 
@@ -236,10 +236,10 @@ class UserService {
       nascimento,
       senha: cypherSenha,
       roles: "Moderador",
-      moderador: {
+      moderadores: {
         cpf: cpf
       },
-    }, { include: [{ model: Moderador, as: 'moderador' }] });
+    }, { include: [{ model: Moderador, as: 'Moderadores' }] });
 
     return userValue;
   }

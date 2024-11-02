@@ -1,11 +1,6 @@
 const database = require("../config/database");
 const { DataTypes } = require('sequelize');
 const Usuario = require("./usuario");
-const RespostaProfessor = require("./respostaProfessor");
-const Questoes = require("./questoes");
-const Disciplina = require("./disciplina");
-const Aula = require("./aula");
-
 class Professor {
   constructor() {
     this.model = database.db.define("Professor", {
@@ -20,11 +15,8 @@ class Professor {
         unique: true,
       },
     });
-    this.model.belongsTo(Usuario, { foreignKey: 'id' });
-    this.model.hasOne(this.model, { foreignKey: 'id' });
-    this.model.hasMany(RespostaProfessor, { foreignKey: 'idProfessor' });
-    this.model.hasMany(Questoes, { foreignKey: 'idProfessor' });
-    this.model.hasMany(Aula, { foreignKey: 'idProfessor' });
+    this.model.hasOne(Usuario, { foreignKey: 'id' });
+    Usuario.belongsTo(this.model, { foreignKey: 'id' });
   }
 }
 

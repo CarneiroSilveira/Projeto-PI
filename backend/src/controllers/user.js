@@ -36,7 +36,8 @@ class UserController {
     }
 
     async createModerador(req, res) {
-        const { username, email, senha, nascimento, nome, sobrenome, genero, cpf } = req.body
+        const cpf = req.body.moderador.cpf
+        const { username, email, senha, nascimento, nome, sobrenome, genero } = req.body
 
         try {
             const user = await UserService.createModerador(username, email, senha, nascimento, nome, sobrenome, genero, cpf)
