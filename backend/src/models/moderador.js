@@ -18,9 +18,14 @@ class Moderador {
       },
 
       // Lembrar de fazer a foreingKey nas as relações one a one no 
-      // usuarioId: {
-
-      // }
+      usuarioId: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        references: {
+          model: Usuario,
+          key: "id"
+        }
+      }
     });
     this.model.hasOne(Usuario, { foreignKey: 'usuarioId' });
     Usuario.belongsTo(this.model, { foreignKey: 'usuarioId' });

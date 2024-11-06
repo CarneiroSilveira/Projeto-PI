@@ -3,7 +3,6 @@ const { DataTypes } = require('sequelize');
 const Usuario = require("./usuario");
 const Aula = require("./aula");
 const Questoes = require("./questoes");
-const Materia = require("./materia");
 
 class Pergunta {
   constructor() {
@@ -58,9 +57,6 @@ class Pergunta {
 
     this.model.hasMany(Questoes, { foreignKey: 'idQuestoes' });
     Questoes.belongsTo(this.model, { foreignKey: 'idQuestoes' });
-
-    this.model.hasOne(Materia, { foreignKey: "id" });
-    Materia.belongsTo(this.model, { foreignKey: "id" });
   }
 }
 

@@ -14,9 +14,17 @@ class Professor {
         allowNull: false,
         unique: true,
       },
+      usuarioId: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        references: {
+          model: Usuario,
+          key: "id"
+        }
+      }
     });
-    this.model.hasOne(Usuario, { foreignKey: 'id' });
-    Usuario.belongsTo(this.model, { foreignKey: 'id' });
+    this.model.hasOne(Usuario, { foreignKey: 'usuarioId' });
+    Usuario.belongsTo(this.model, { foreignKey: 'usuarioId' });
   }
 }
 
