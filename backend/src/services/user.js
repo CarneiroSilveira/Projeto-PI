@@ -310,7 +310,7 @@ class UserService {
     oldUser.biografia = biografia;
     oldUser.genero = genero;
     oldUser.sobrenome = sobrenome;
-    oldUser.nascimento = nascimento
+    oldUser.nascimento = nascimento;
     oldUser.senha = senha
       ? await bcrypt.hash(String(senha), SALT_VALUE)
       : oldUser.senha;

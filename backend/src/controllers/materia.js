@@ -1,6 +1,6 @@
 const MateriaService = require('../services/materia');
 
-class MateriaController{
+class MateriaController {
     async createMateria(req, res) {
         const { nome } = req.body
 
@@ -34,12 +34,12 @@ class MateriaController{
         }
     }
 
-    async findUmaMateria(req, res){
+    async findUmaMateria(req, res) {
         try {
             const id = req.params.id;
-            
-                const materia = await MateriaService.findMateria(Number(id));
-                return res.status(200).send(materia);
+
+            const materia = await MateriaService.findMateria(Number(id));
+            return res.status(200).send(materia);
         } catch (e) {
             return res.status(400).send({ error: `Erro ao listar usuário ${e.message}` })
         }

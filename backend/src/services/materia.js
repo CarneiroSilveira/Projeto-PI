@@ -24,13 +24,13 @@ class MateriaService {
         return MateriaValue;
     }
     async update(id, nome) {
-        const oldUser = await usuario.findByPk(id);
+        const oldMateria = await usuario.findByPk(id);
         if (!nameRegex.test(nome)) {
             throw new Error("O nome deve conter apenas letras e ter pelo menos 2 caracteres.");
         }
-        oldUser.nome = nome;
-        oldUser.save();
-        return oldUser;
+        oldMateria.nome = nome;
+        oldMateria.save();
+        return oldMateria;
     }
     async listAll() {
         return materia.findAll();
