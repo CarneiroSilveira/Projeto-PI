@@ -49,7 +49,7 @@ class Usuario {
                 type: DataTypes.STRING(32),
                 allowNull: false
             }
-        });
+        }, { deletedAt: true });
     }
 };
 

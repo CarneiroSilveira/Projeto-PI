@@ -4,8 +4,8 @@ const jwt = require("jsonwebtoken");
 const { nameRegex, usernameRegex, senhaRegex, emailRegex, dataRegex, cpfRegex } = require("../common/regex");
 const Professor = require("../models/professor");
 const Moderador = require("../models/moderador");
+require('dotenv').config()
 
-const SECRET_KEY = "exemplo";
 const SALT_VALUE = 10;
 const generos = ['Masculino', 'Feminino', 'Nao-Binario', 'Outro']
 
@@ -332,7 +332,6 @@ class UserService {
   async find() {
     return usuario.findAll();
   }
-
   async login(email, senha) {
     if (email === undefined || senha === undefined) {
       throw new Error("Email e senha são obrigatórios.");
@@ -349,7 +348,7 @@ class UserService {
       throw new Error("[2] Usuário e senha inválidos.");
     }
 
-    return jwt.sign({ id: userValue.id }, SECRET_KEY, { expiresIn: 60 * 60 });
+    return jwt.sign({ id: userValue.id }, process.env.JWT_PASS, { expiresIn: 60 * 60 });
   }
 }
 
