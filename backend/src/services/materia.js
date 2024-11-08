@@ -24,7 +24,7 @@ class MateriaService {
         return MateriaValue;
     }
     async update(id, nome) {
-        const oldMateria = await usuario.findByPk(id);
+        const oldMateria = await materia.findByPk(id);
         if (!nameRegex.test(nome)) {
             throw new Error("O nome deve conter apenas letras e ter pelo menos 2 caracteres.");
         }

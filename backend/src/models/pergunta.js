@@ -2,7 +2,7 @@ const database = require("../config/database");
 const { DataTypes } = require('sequelize');
 const Usuario = require("./usuario");
 const Aula = require("./aula");
-const Questoes = require("./questoes");
+const Questao = require("./questao");
 
 class Pergunta {
   constructor() {
@@ -36,7 +36,7 @@ class Pergunta {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
         references: {
-          model: Questoes,
+          model: Questao,
           key: "id"
         }
       },
@@ -55,8 +55,8 @@ class Pergunta {
     this.model.hasMany(Aula, { foreignKey: 'idAula' });
     Aula.belongsTo(this.model, { foreignKey: 'idAula' });
 
-    this.model.hasMany(Questoes, { foreignKey: 'idQuestoes' });
-    Questoes.belongsTo(this.model, { foreignKey: 'idQuestoes' });
+    this.model.hasMany(Questao, { foreignKey: 'idQuestoes' });
+    Questao.belongsTo(this.model, { foreignKey: 'idQuestoes' });
   }
 }
 

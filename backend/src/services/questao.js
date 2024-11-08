@@ -1,8 +1,7 @@
-const Professor = require("../models/professor");
-const questoes = require("../models/questoes");
+const questao = require("../models/questao");
 
-class QuestoesService {
-    async createQuestoes(titulo, descricao, tipo, a, b, c, d, e, idProfessor, idMateria, imagem) {
+class QuestaoService {
+    async createQuestao(titulo, descricao, tipo, a, b, c, d, e, idProfessor, idMateria, imagem) {
 
         const buffer = Buffer.from(imagem, "base64");
 
@@ -44,7 +43,7 @@ class QuestoesService {
             throw new Error("Id é obrigatório.");
         }
 
-        const questaoValue = await usuario.findByPk(id);
+        const questaoValue = await questao.findByPk(id);
 
         if (!questaoValue) {
             throw new Error("Questão não encontrada.");
@@ -54,7 +53,7 @@ class QuestoesService {
     }
 
     async update(id, titulo, descricao, tipo, a, b, c, d, e, idProfessor, idMateria, imagem) {
-        const oldQuestao = await usuario.findByPk(id);
+        const oldQuestao = await questao.findByPk(id);
         const buffer = Buffer.from(imagem, "base64");
 
         if (descricao.length > 65536) {
@@ -95,4 +94,4 @@ class QuestoesService {
     }
 }
 
-module.exports = new QuestoesService();
+module.exports = new QuestaoService();

@@ -3,9 +3,9 @@ const { DataTypes } = require('sequelize');
 const Professor = require("./professor");
 const Materia = require("./materia");
 
-class Questoes {
+class Questao {
     constructor() {
-        this.model = database.db.define("Questoes", {
+        this.model = database.db.define("Questao", {
             id: {
                 type: DataTypes.INTEGER.UNSIGNED,
                 autoIncrement: true,
@@ -73,4 +73,4 @@ class Questoes {
     }
 }
 
-module.exports = new Questoes().model;
+module.exports = new Questao().model;

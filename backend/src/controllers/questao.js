@@ -1,57 +1,57 @@
-const MateriaService = require('../services/materia');
+const QuestaoService = require('../services/questao');
 
-class MateriaController {
-    async createMateria(req, res) {
+class QuestaoController {
+    async createQuestao(req, res) {
         const { nome } = req.body
 
         try {
-            const materia = await MateriaService.createMateria(nome)
-            return res.status(201).send(materia)
+            const questao = await QuestaoService.createQuestao(nome)
+            return res.status(201).send(questao)
         } catch (e) {
             return res.status(400).send({ error: `Erro ao criar usuário ${e.message}` })
         }
     }
-    async updateMateria(req, res) {
+    async updateQuestao(req, res) {
         const id = req.params.id || req.session.id
         const { nome } = req.body
 
         try {
-            const materia = await MateriaService.update(Number(id), nome)
-            return res.status(200).send(materia)
+            const questao = await QuestaoService.update(Number(id), nome)
+            return res.status(200).send(questao)
         } catch (e) {
             return res.status(400).send({ error: `Erro ao alterar usuário ${e.message}` })
         }
     }
 
-    async deleteMateria(req, res) {
+    async deleteQuestao(req, res) {
         const id = req.params.id || req.session.id // Quando for fazer uma verificação se é o usuário ou o administrador que está fazendo esssa açao adicione isto
 
         try {
-            await MateriaService.delete(Number(id))
+            await QuestaoService.delete(Number(id))
             return res.status(204).send()
         } catch (e) {
             return res.status(400).send({ error: `Erro ao deletar usuário ${e.message}` })
         }
     }
 
-    async findMateria(req, res) {
+    async findQuestao(req, res) {
         const id = req.params.id;
         try {
-            const materia = await MateriaService.findMateria(Number(id));
-            return res.status(200).send(materia);
+            const questao = await QuestaoService.findQuestao(Number(id));
+            return res.status(200).send(questao);
         } catch (e) {
             return res.status(400).send({ error: `Erro ao listar usuário ${e.message}` })
         }
     }
 
-    async findMaterias(req, res) {
+    async findQuestoes(req, res) {
         try {
-            const materias = await MateriaService.listAll()
-            return res.status(200).send(materias)
+            const questao = await QuestaoService.listAll()
+            return res.status(200).send(questao)
         } catch (e) {
             return res.status(400).send({ error: `Erro ao listar usuários ${e.message}` })
         }
     }
 }
 
-module.exports = new MateriaController()
+module.exports = new QuestaoController()

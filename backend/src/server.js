@@ -9,7 +9,7 @@ const MateriaController = require("./routes/materia");
 
 const Usuario = require('./models/usuario');
 const RespostaProfessor = require('./models/respostaProfessor');
-const Questoes = require('./models/questoes');
+const Questoes = require('./models/questao');
 const Moderador = require('./models/moderador');
 const Denuncia = require('./models/denuncia');
 const Professor = require('./models/professor');
