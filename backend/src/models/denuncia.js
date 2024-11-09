@@ -46,7 +46,7 @@ class Denuncia {
         }
       }
 
-    });
+    }, { deletedAt: true });
     this.model.hasMany(Moderador, { foreignKey: "idModerador" });
     Moderador.belongsTo(this.model, { foreignKey: "idModerador" });
 

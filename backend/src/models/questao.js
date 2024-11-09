@@ -21,27 +21,27 @@ class Questao {
                 allowNull: false
             },
             imagem: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(255),
                 allowNull: true
             },
             a: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(1024),
                 allowNull: true
             },
             b: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(1024),
                 allowNull: true
             },
             c: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(1024),
                 allowNull: true
             },
             d: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(1024),
                 allowNull: true
             },
             e: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(1024),
                 allowNull: true
             },
             tipo: {

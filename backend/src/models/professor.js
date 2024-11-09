@@ -22,7 +22,7 @@ class Professor {
           key: "id"
         }
       }
-    });
+    }, { deletedAt: true });
     this.model.hasOne(Usuario, { foreignKey: 'usuarioId' });
     Usuario.belongsTo(this.model, { foreignKey: 'usuarioId' });
   }

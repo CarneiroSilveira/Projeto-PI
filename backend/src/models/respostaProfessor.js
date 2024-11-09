@@ -41,7 +41,7 @@ class RespostaProfessor {
                     key: "id"
                 }
             },
-        });
+        }, { deletedAt: true });
         this.model.hasMany(Usuario, { foreignKey: 'idUsuario' });
         Usuario.belongsTo(this.model, { foreignKey: 'idUsuario' });
 

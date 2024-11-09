@@ -11,7 +11,7 @@ class Materia {
         allowNull: false
       },
       nome: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false
       }
     });

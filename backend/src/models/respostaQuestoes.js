@@ -13,11 +13,11 @@ class RespostaQuestoes {
                 allowNull: false
             },
             resposta: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(255),
                 allowNull: true
             },
             anexo: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(255),
                 allowNull: true
             },
             idUsuario: {

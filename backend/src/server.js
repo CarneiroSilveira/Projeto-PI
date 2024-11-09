@@ -20,7 +20,7 @@ const Pergunta = require('./models/pergunta');
 const RespostaQuestoes = require('./models/respostaQuestoes');
 
 const app = express();
-app.use(express.json({ limit: "50mb" }));
+app.use(express.json());
 
 app.post("/api/v1/login", UserController.login);
 app.post("/api/v1/cadastro", UserController.createUser);

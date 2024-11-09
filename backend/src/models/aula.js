@@ -13,11 +13,11 @@ class Aula {
                 allowNull: false
             },
             titulo: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(255),
                 allowNull: false
             },
             video: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(255),
                 allowNull: true
             },
             descricao: {
@@ -25,7 +25,7 @@ class Aula {
                 allowNull: false
             },
             imagem: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING(255),
                 allowNull: true
             },
             idProfessor: {

@@ -13,7 +13,7 @@ class Pergunta {
         primaryKey: true
       },
       titulo: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(255),
         allowNull: false
       },
       corpo: {
