@@ -21,18 +21,41 @@ class AulaService {
 
     async update(id, titulo, descricao, idProfessor, idMateria, imagem, video) {
         const oldAula = await aula.findByPk(id);
-
+        oldAula.titulo = titulo;
+        oldAula.descricao = descricao;
+        oldAula.idProfessor = idProfessor;
+        oldAula.idMateria = idMateria;
+        oldAula.imagem = imagem;
+        oldAula.video = video;
+        oldAula.save();
+        return oldAula;
     }
 
-    async findAula() {
+    async findAula(id) {
+        if (id === undefined) {
+            throw new Error("Id é obrigatório.");
+        }
 
+        const AulaValue = await materia.findByPk(id);
+
+        if (!AulaValue) {
+            throw new Error("Materia não encontrada.");
+        }
+
+        return AulaValue;
     }
 
-    async findAulas() {
-
+    async listAll() {
+        return aula.findAll();
     }
 
     async delete() {
-
+        if (id === undefined) {
+            throw new Error("Id é obrigatório.");
+        }
+        const aulaValue = await this.findMateria(id);
+        aulaValue.destroy();
     }
 }
+
+module.exports = new AulaService();
