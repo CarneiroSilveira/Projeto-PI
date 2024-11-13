@@ -34,7 +34,7 @@ class Pergunta {
       },
       idQuestoes: {
         type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: Questao,
           key: "id"
@@ -42,7 +42,7 @@ class Pergunta {
       },
       idAula: {
         type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false,
+        allowNull: true,
         references: {
           model: Aula,
           key: "id"
