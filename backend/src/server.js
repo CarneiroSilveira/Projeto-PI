@@ -21,6 +21,7 @@ const RespostaQuestoes = require('./models/respostaQuestoes');
 
 const app = express();
 app.use(express.json());
+// app.use(cors());
 
 app.post("/api/v1/login", UserController.login);
 app.post("/api/v1/cadastro", UserController.createUser);
