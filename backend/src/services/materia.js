@@ -28,7 +28,7 @@ class MateriaService {
         if (!nameRegex.test(nome)) {
             throw new Error("O nome deve conter apenas letras e ter pelo menos 2 caracteres.");
         }
-        oldMateria.nome = nome;
+        oldMateria.nome = nome || oldMateria.nome;
         oldMateria.save();
         return oldMateria;
     }

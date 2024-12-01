@@ -15,7 +15,7 @@ class QuestaoService {
             throw new Error("Calma ai usuário, vamos manerar no tamanho das questões que banco de dados é caro. O máximo é 1024 caracteres");
         }
 
-        const questaoValue = await ({
+        const questaoValue = await questao.create({
             titulo,
             descricao,
             tipo,
@@ -57,19 +57,20 @@ class QuestaoService {
             throw new Error("Calma ai usuário, vamos manerar no tamanho das questões que banco de dados é caro. O máximo é 1024 caracteres");
         }
 
-        oldQuestao.titulo = titulo;
-        oldQuestao.descricao = descricao;
-        oldQuestao.tipo = tipo;
-        oldQuestao.a = a;
-        oldQuestao.b = b;
-        oldQuestao.c = c;
-        oldQuestao.d = d;
-        oldQuestao.e = e;
-        oldQuestao.idProfessor = idProfessor;
-        oldQuestao.idMateria = idMateria;
-        oldQuestao.imagem = imagem;
+        oldQuestao.titulo = titulo || oldQuestao.titulo;
+        oldQuestao.descricao = descricao || oldQuestao.descricao;
+        oldQuestao.tipo = tipo || oldQuestao.tipo;
+        oldQuestao.a = a || oldQuestao.a;
+        oldQuestao.b = b || oldQuestao.b;
+        oldQuestao.c = c || oldQuestao.c;
+        oldQuestao.d = d || oldQuestao.d;
+        oldQuestao.e = e || oldQuestao.e;
+        oldQuestao.idProfessor = idProfessor || oldQuestao.idProfessor;
+        oldQuestao.idMateria = idMateria || oldQuestao.idMateria;
+        oldQuestao.imagem = imagem || oldQuestao.imagem;
         oldQuestao.save();
-        return oldUser;
+
+        return oldQuestao;
     }
 
     async delete(id) {
